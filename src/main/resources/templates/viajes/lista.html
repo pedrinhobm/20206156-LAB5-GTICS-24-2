@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TravelCan- Menu</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div th:replace="fragments/navbar ::navbar"></div>
+        <h2>Lista de Viajes</h2>
+        <a  th:href="@{/viajes/nuevo}">Nuevo viaje</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Persona Titular </th>
+                    <th>Destino</th>
+                    <th>Cantidad de Perros</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="viajes : ${viajes}">
+                    <td th:text="${viaje.persona.nombre}"></td>
+                    <td th:text="${viaje.lugar.nombrLugar}"></td>
+                    <td th:text="${viaje.cantPerros}"></td>
+
+                    <td>
+                        <a class="btn btn-info" th:href="@{/viajes/detalle/{id}(id=${viaje.idViaje})}">Ver</a>
+                        <a class="btn btn-info" th:href="@{/viajes/edirar/{id}(id=${viaje.idViaje})}">Editar</a>
+                        <a class="btn btn-info" th:href="@{/viajes/borrar/{id}(id=${viaje.idViaje})}">Borrar</a>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Lista de Empleados</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" th:href="@{/}">Gestión de Empleados</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/employees}">Lista de Empleados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/departments}">Departamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/jobs}">Puestos</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <h2>Lista de Empleados</h2>
+            <a class="btn btn-primary" th:href="@{/employees/create}">Nuevo Empleado</a>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Puesto</th>
+                        <th>Departamento</th>
+                        <th>Ciudad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="employee : ${employees}">
+                        <td th:text="${employee.firstName}">Nombre</td>
+                        <td th:text="${employee.lastName}">Apellido</td>
+                        <td th:text="${employee.job.jobTitle}">Puesto</td>
+                        <td th:text="${employee.department.departmentName}">Departamento</td>
+                        <td th:text="${employee.department.location.city}">Ciudad</td>
+                        <td>
+                            <a class="btn btn-info" th:href="@{/employees/edit/{id}(id=${employee.employeeId})}">Editar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

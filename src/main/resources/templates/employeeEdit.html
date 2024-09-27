@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Editar Empleado</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" th:href="@{/}">Gestión de Empleados</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/employees}">Lista de Empleados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/departments}">Departamentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/jobs}">Puestos</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <h2>Editar Empleado</h2>
+            <form th:action="@{/employees/update}" th:object="${employee}" method="post">
+                <div class="form-group">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{employee.firstName}" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Apellido</label>
+                    <input type="text" class="form-control" th:field="*{employee.lastName}" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Correo Electrónico</label>
+                    <input type="email" class="form-control" th:field="*{employee.email}" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Puesto</label>
+                    <select class="form-control" th:field="*{employee.job}">
+                        <option th:each="job : ${jobs}" th:value="${job}" th:text="${job.jobTitle}">Puesto</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Departamento</label>
+                    <select class="form-control" th:field="*{employee.department}">
+                        <option th:each="department : ${departments}" th:value="${department}" th:text="${department.departmentName}">Departamento</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Jefe</label>
+                    <select class="form-control" th:field="*{employee.manager}">
+                        <option th:each="manager : ${managers}" th:value="${manager}" th:text="${manager.firstName + ' ' + manager.lastName}">Jefe</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Salario</label>
+                    <input type="text" class="form-control" th:field="*{employee.salary}" />
+                </div>
+                <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                <a th:href="@{/employee}" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </body>
+</html>
